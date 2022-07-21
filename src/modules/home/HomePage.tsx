@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */
 import {
   ChangeEvent,
   FC,
@@ -10,9 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import debounce from "lodash.debounce";
 import classes from "./HomePage.module.scss";
-import ROUTES, { Link } from "../../routes";
+import ROUTES, { useNavigateTo } from "../../routes";
 import IUser from "../../domains/user";
 import useUserRepositories from "../../repositories/UserRepository";
+import { useUserContext } from "../../contexts/UserContext";
 
 interface IHomePage {}
 
@@ -46,6 +48,16 @@ const HomePage: FC<IHomePage> = (props) => {
     setQuery(e.target.value);
   }, []);
 
+  const { setUserData } = useUserContext();
+  const navigateTo = useNavigateTo();
+  const handleUserClick = useCallback(
+    (user: IUser) => {
+      setUserData(user);
+      navigateTo(ROUTES.viewUser, user.username);
+    },
+    [navigateTo, setUserData]
+  );
+
   return (
     <div className={classes.homePage}>
       <div className={classes.searchBar}>
@@ -64,16 +76,16 @@ const HomePage: FC<IHomePage> = (props) => {
       <div className={classes.result}>
         <div className={classes.listUser}>
           {users.map((u) => (
-            <Link
+            <div
               key={u.username}
-              route={ROUTES.viewUser}
-              params={[u.username]}
+              className={classes.user}
+              /* eslint-disable-next-line react/jsx-no-bind */
+              onClick={() => handleUserClick(u)}
+              role="button"
             >
-              <div className={classes.user}>
-                <img src={u.avatarUrl} alt="" />
-                <div>{u.username}</div>
-              </div>
-            </Link>
+              <img src={u.avatarUrl} alt="" />
+              <div>{u.username}</div>
+            </div>
           ))}
         </div>
         {/*<div className={classes.higlight}>highlight</div>*/}

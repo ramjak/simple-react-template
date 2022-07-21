@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BasePage from "./components/BasePage";
 import ROUTES, { routeEnum } from "./routes";
+import { UserContextProvider } from "./contexts/UserContext";
 
 function App() {
   const getRoutes = useCallback(
@@ -32,12 +33,14 @@ function App() {
 
   return (
     <BrowserRouter>
-      <BasePage>
-        <Switch>
-          {getRoutes(false)}
-          <Route component={renderNotFound} />
-        </Switch>
-      </BasePage>
+      <UserContextProvider>
+        <BasePage>
+          <Switch>
+            {getRoutes(false)}
+            <Route component={renderNotFound} />
+          </Switch>
+        </BasePage>
+      </UserContextProvider>
     </BrowserRouter>
   );
 }
