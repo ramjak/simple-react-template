@@ -1,0 +1,56 @@
+.userPage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.shortProfile {
+  border-bottom: 3px solid #efefef;
+  padding: 16px 20px;
+  display: flex;
+  font-weight: bold;
+  div {
+    margin-left: 16px;
+    line-height: 32px;
+    font-size: 24px;
+  }
+}
+.username {
+  color: #6a6d7a;
+}
+.result {
+  flex-grow: 1;
+  height: 0;
+  display: flex;
+  padding-bottom: 8px;
+}
+.listRepo {
+  height: 100%;
+  overflow-y: scroll;
+  flex: 1;
+}
+.repoHeader {
+  padding: 12px 20px;
+  line-height: 24px;
+  font-size: 24px;
+  align-items: center;
+}
+.repo {
+  display: flex;
+  padding: 12px 20px;
+  line-height: 24px;
+  font-size: 24px;
+  align-items: center;
+  img {
+    border-radius: 100%;
+    margin-right: 16px;
+  }
+  .username {
+    color: #6a6d7a;
+    margin-left: 16px;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: #f9fbfc;
+    cursor: pointer;
+  }
+}
