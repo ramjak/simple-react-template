@@ -7,7 +7,7 @@
 .content {
   //margin: auto;
   //max-width: 1000px;
-  margin: 100px auto auto;
+  margin: auto auto;
   background-color: white;
   height: 70%;
   min-height: 800px;
@@ -15,8 +15,13 @@
   min-width: 1000px;
   border-radius: 10px;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
-
   h1 {
     margin: 0;
+  }
+  @media screen and (max-width: 1000px) {
+    min-width: 100%;
+  }
+  @media screen and (max-height: 800px) {
+    min-height: 100%;
   }
 }

@@ -15,7 +15,7 @@
 .input {
   height: 24px;
   vertical-align: middle;
-  font-size: 24px;
+  font-size: 22px;
   padding: 0;
   border: 0;
   line-height: 24px;
@@ -43,9 +43,12 @@
   line-height: 24px;
   font-size: 24px;
   align-items: center;
+  border-bottom: 1px solid #efefef;
   img {
     border-radius: 100%;
     margin-right: 16px;
+    width: 32px;
+    height: 32px;
   }
   .username {
     color: #6a6d7a;
