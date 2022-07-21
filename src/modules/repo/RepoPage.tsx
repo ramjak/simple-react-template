@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactMarkdown from "react-markdown";
 import classes from "./RepoPage.module.scss";
 import { IRouteParams, useParams } from "../../routes";
 import useRepoRepositories from "../../repositories/RepoRepository";
@@ -27,8 +28,8 @@ const RepoPage: FC<IRepoPage> = (props) => {
       </div>
       <div className={classes.readme}>
         <div>
-          {/* eslint-disable-next-line react/no-danger */}
-          <div dangerouslySetInnerHTML={{ __html: readme }} />
+          <ReactMarkdown>{readme}</ReactMarkdown>
+          {/*<div dangerouslySetInnerHTML={{ __html: readme }} />*/}
         </div>
       </div>
     </div>
