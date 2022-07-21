@@ -1,25 +1,44 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { useCallback } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import BasePage from "./components/BasePage";
+import ROUTES, { routeEnum } from "./routes";
 
 function App() {
+  const getRoutes = useCallback(
+    (isAuthed: boolean) =>
+      Object.values(ROUTES)
+        .filter(
+          (r) =>
+            (r.type === routeEnum.GUEST && !isAuthed) ||
+            (r.type === routeEnum.AUTHED && isAuthed) ||
+            r.type === routeEnum.FREE
+        )
+        .map((route) => (
+          <Route
+            key={route.path}
+            exact={route.exact}
+            path={route.path}
+            // eslint-disable-next-line react/jsx-no-bind
+            render={(props) => {
+              const Page = route.component;
+              return <Page {...props} />;
+            }}
+          />
+        )),
+    []
+  );
+
+  const renderNotFound = useCallback(() => <h1>Not Found!</h1>, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <BasePage>
+        <Switch>
+          {getRoutes(false)}
+          <Route component={renderNotFound} />
+        </Switch>
+      </BasePage>
+    </BrowserRouter>
   );
 }
 
