@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import BasePage from "./components/BasePage";
-import ROUTES, { routeEnum } from "./routes";
+import ROUTES from "./routes";
 import { UserContextProvider } from "./contexts/UserContext";
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
       Object.values(ROUTES)
         .filter(
           (r) =>
-            (r.type === routeEnum.GUEST && !isAuthed) ||
-            (r.type === routeEnum.AUTHED && isAuthed) ||
-            r.type === routeEnum.FREE
+            (r.type === "GUEST" && !isAuthed) ||
+            (r.type === "PRIVATE" && isAuthed) ||
+            r.type === "PUBLIC"
         )
         .map((route) => (
           <Route

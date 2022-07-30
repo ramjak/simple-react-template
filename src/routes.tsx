@@ -10,18 +10,14 @@ import HomePage from "./modules/home/HomePage";
 import RepoPage from "./modules/repo/RepoPage";
 import UserPage from "./modules/user/UserPage";
 
-export enum routeEnum {
-  FREE = "FREE",
-  GUEST = "GUEST",
-  AUTHED = "AUTHED",
-}
+export type routeType = "PUBLIC" | "PRIVATE" | "GUEST";
 
 export interface IRoute {
   path: string;
   exact?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.FC<RouteComponentProps & any>;
-  type: routeEnum;
+  type: routeType;
 }
 
 export interface IRouteParams {
@@ -35,17 +31,17 @@ const ROUTES: Record<keyof IRouteParams, IRoute> = {
     path: "/",
     exact: true,
     component: HomePage,
-    type: routeEnum.GUEST,
+    type: "PUBLIC",
   },
   viewRepo: {
     path: "/user/:username/:repo",
     component: RepoPage,
-    type: routeEnum.GUEST,
+    type: "PUBLIC",
   },
   viewUser: {
     path: "/user/:username",
     component: UserPage,
-    type: routeEnum.GUEST,
+    type: "PUBLIC",
   },
 };
 
